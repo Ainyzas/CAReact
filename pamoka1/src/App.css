@@ -1,0 +1,41 @@
+header {
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+}
+
+.green-background {
+  background-color: green;
+}
+
+nav {
+  text-align: center;
+  padding: 10px 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  padding-left: 5px;
+}
+
+main {
+  padding: 10px;
+  background-color: rgba(128, 128, 128, 0.473);
+}
+
+.background {
+  width: 100%;
+}
+
+.header-text {
+  color: white;
+  padding: 10px;
+}
+
+footer {
+  padding: 10px;
+  background-color: rgba(0, 148, 0, 0.842);
+}
