@@ -1,0 +1,9 @@
+.container {
+  background-color: green;
+}
+
+.title {
+  padding: 10px 0 10px 5px;
+  font-size: 24px;
+  color: white;
+}
