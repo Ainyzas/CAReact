@@ -1,0 +1,19 @@
+.container {
+  border: 1px solid black;
+  box-shadow: grey 0 0 1px 1px;
+  margin: 1rem 2rem;
+}
+
+.container p {
+  margin: 0.5rem;
+}
+
+.artist {
+  font-size: 18px;
+  color: rgb(88, 88, 88);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+}
