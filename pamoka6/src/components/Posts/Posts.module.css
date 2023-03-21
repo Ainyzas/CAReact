@@ -1,0 +1,10 @@
+.post {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post div {
+  max-width: 35%;
+  margin: 0 auto;
+  text-align: center;
+}
