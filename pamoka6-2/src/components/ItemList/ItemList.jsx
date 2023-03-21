@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import style from './ItemList.module.css';
 import Item from '../Item/Item';
 
 export default function ItemList() {
@@ -15,7 +16,7 @@ export default function ItemList() {
           setIsLoading(false);
         })
         .catch((error) => console.log(error));
-    }, 2000);
+    }, 100);
   }, []);
 
   function handleDelete(index) {
@@ -27,7 +28,7 @@ export default function ItemList() {
   }
 
   return (
-    <div>
+    <div className={style.item}>
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
