@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FavoritesContext } from '../../App';
 import Movie from '../Movie/Movie';
-import style from './MovieList.module.css';
+import style from '../SharedStyle/SharedStyle.module.css';
 
 export default function MovieList() {
   const { favorites, setFavorites } = useContext(FavoritesContext);
@@ -49,6 +49,7 @@ export default function MovieList() {
               index={index}
               title={movie.title}
               image={movie.image}
+              favorite={false}
               addFavoritesHandler={addFavoritesHandler}
             />
           );

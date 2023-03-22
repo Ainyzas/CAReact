@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export default function Movie({ index, title, image, addFavoritesHandler }) {
-  const [isFavorited, setIsFavorited] = useState(false);
+export default function Movie({ index, title, image, favorite, addFavoritesHandler }) {
+  const [isFavorited, setIsFavorited] = useState(favorite);
 
   function handleClick() {
     if (!isFavorited) {
@@ -17,7 +17,7 @@ export default function Movie({ index, title, image, addFavoritesHandler }) {
       <h4>{title}</h4>
       <img src={image} alt=""></img>
       <br />
-      <button onClick={handleClick}>Add to Favorites</button>
+      {!favorite && <button onClick={handleClick}>Add to Favorites</button>}
     </div>
   );
 }
