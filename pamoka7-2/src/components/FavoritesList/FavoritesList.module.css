@@ -1,0 +1,19 @@
+.header {
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wrapper div {
+  width: 33%;
+}
+
+.wrapper div img {
+  width: 25%;
+}
