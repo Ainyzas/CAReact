@@ -27,9 +27,12 @@ export async function signUp(req, res) {
 }
 
 export function signIn(req, res) {
-  res.json({
-    hello: 'sup, signIn',
-  });
+  try {
+    const { email, password } = req.body;
+    res.status(200).json({ success: 'yay' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 export function signOut(req, res) {

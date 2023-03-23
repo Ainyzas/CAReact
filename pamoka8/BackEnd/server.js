@@ -6,7 +6,7 @@ import router from './router/index.js';
 
 dotenv.config();
 
-const { PORT } = process.env || 3500;
+const { PORT } = process.env || 4000;
 
 mongoConnector();
 
