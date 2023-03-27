@@ -1,0 +1,84 @@
+.registration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  padding-bottom: 2rem;
+  margin: 10rem auto;
+  gap: 1rem;
+  border: 2px solid gray;
+  border-radius: 15px;
+}
+
+.title {
+  width: 100%;
+  padding: 0.75rem 0;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  border-radius: 15px 15px 0 0;
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  margin-left: 7.5rem;
+}
+
+.name .inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: grey;
+  font-size: 14px;
+  width: 25%;
+}
+
+.name .inputContainer input {
+  width: 80%;
+}
+
+input {
+  padding: 0.25rem;
+  background-color: gainsboro;
+  border: 1px solid white;
+  border-radius: 7px;
+}
+
+.inputContainer:not(.name > .inputContainer) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  padding-bottom: 1rem;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.inputContainer:not(.name > .inputContainer) span {
+  width: 25%;
+}
+
+.inputContainer:not(.name > .inputContainer) input {
+  width: 75%;
+  margin-left: 1rem;
+}
+
+.registerButton {
+  padding: 0.4rem 1.25rem;
+  font-size: 20px;
+  font-weight: 600;
+  background-image: linear-gradient(to bottom right, #57886cb7, 60%, #b42805c4);
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.registerButton:hover {
+  cursor: pointer;
+}
