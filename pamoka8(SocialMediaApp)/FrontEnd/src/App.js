@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
       <MainLayout />
+      {/* <SignInLayout /> */}
       {/* <SignOutButton />
-      <SignInLayout /> */}
       {/* <RegistrationLayout /> */}
     </div>
   );
