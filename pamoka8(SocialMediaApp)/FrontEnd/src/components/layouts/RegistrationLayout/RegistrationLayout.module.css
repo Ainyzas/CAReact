@@ -43,7 +43,7 @@
   width: 80%;
 }
 
-input {
+.inputContainer input {
   padding: 0.25rem;
   background-color: gainsboro;
   border: 1px solid white;
