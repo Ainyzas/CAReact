@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from '../../MainHeader/MainHeader';
 import NewPost from '../../NewPost/NewPost';
+import PostList from '../../PostList/PostList';
 
 export default function MainLayout() {
+  const [posts, setPosts] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +19,8 @@ export default function MainLayout() {
   return (
     <div>
       <MainHeader />
-      <NewPost />
+      <NewPost setPosts={setPosts} />
+      <PostList posts={posts} setPosts={setPosts} />
     </div>
   );
 }

@@ -26,9 +26,22 @@ export async function deletePostById(req, res) {
   try {
     const { id } = req.params;
 
-    const deleteRes = await PostModel.findOneAndDelete(id);
+    const deleteRes = await PostModel.findByIdAndDelete(id);
 
     res.json(deleteRes);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error.message);
+  }
+}
+
+export async function getAllPosts(req, res) {
+  try {
+    const { id } = req.params;
+
+    const posts = await PostModel.find({ userId: id }, { __v: false });
+
+    res.status(200).json(posts);
   } catch (error) {
     console.log(error);
     res.status(500).json(error.message);
