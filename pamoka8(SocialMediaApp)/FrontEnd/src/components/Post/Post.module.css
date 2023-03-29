@@ -1,0 +1,30 @@
+.postContainer {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid gainsboro;
+  box-shadow: gray 0 0 1px 1px;
+  border-radius: 6px;
+}
+
+.postContainer p {
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+.buttonContainer {
+  text-align: right;
+}
+
+.buttonContainer button {
+  padding: 0.2rem 0.5rem;
+  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  box-shadow: gray 0 0 1px 1px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.buttonContainer button:hover {
+  cursor: pointer;
+}

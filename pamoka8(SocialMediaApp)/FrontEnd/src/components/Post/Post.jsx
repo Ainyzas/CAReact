@@ -1,5 +1,6 @@
 import React from 'react';
 import { deletePost } from '../../api-calls/posts';
+import style from './Post.module.css';
 
 export default function Post({ body, id, setPosts }) {
   function deleteButtonHandler() {
@@ -11,11 +12,11 @@ export default function Post({ body, id, setPosts }) {
   }
 
   return (
-    <div>
-      <hr />
+    <div className={style.postContainer}>
       <p>{body}</p>
-      <button onClick={deleteButtonHandler}>Delete</button>
-      <hr />
+      <div className={style.buttonContainer}>
+        <button onClick={deleteButtonHandler}>Delete</button>
+      </div>
     </div>
   );
 }

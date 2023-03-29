@@ -1,0 +1,35 @@
+.postForm {
+  width: 25%;
+  margin: 0 auto;
+}
+
+.postForm label {
+  color: rgb(75, 75, 75);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.postForm textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1rem 0;
+  resize: none;
+}
+
+.buttonContainer {
+  text-align: right;
+}
+
+.buttonContainer button {
+  padding: 0.2rem 0.5rem;
+  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  box-shadow: gray 0 0 1px 1px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.buttonContainer button:hover {
+  cursor: pointer;
+}
