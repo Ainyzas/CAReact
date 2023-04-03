@@ -3,18 +3,57 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationCrosshairs, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-const HOST = 'https://api.openweathermap.org/data/2.5/weather';
-const API_KEY = '388a2231ecef80643c1ab29f8455c8bf';
+const WEATHER_HOST = 'https://api.openweathermap.org/data/2.5/weather';
+const FORECAST_HOST = 'https://api.openweathermap.org/data/2.5/forecast';
+const API_KEY = '4540327c0fb82a25d6b1cd8a435702a8';
 
-export default function CityForm({ setTemp, setLastUpdated }) {
+export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
   const [city, setCity] = useState('');
   const [coordinates, setCoordinates] = useState({});
-  const [doesCityExist, setDoesCityExist] = useState(false);
+  const [doesCityExist, setDoesCityExist] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(WEATHER_HOST, {
+        params: {
+          q: 'kaunas',
+          appid: API_KEY,
+          units: 'metric',
+        },
+      })
+      .then((response) => {
+        setWeather(response.data);
+        handleSetLastUpdated();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(FORECAST_HOST, {
+        params: {
+          q: 'kaunas',
+          appid: API_KEY,
+          units: 'metric',
+        },
+      })
+      .then((response) => {
+        let data = [];
+        for (let i = 1; i < 6; i++) {
+          data.push(response.data.list[i]);
+        }
+        setForecast(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     if (coordinates.lat && coordinates.long) {
       axios
-        .get(HOST, {
+        .get(WEATHER_HOST, {
           params: {
             lat: coordinates.lat,
             lon: coordinates.long,
@@ -23,12 +62,12 @@ export default function CityForm({ setTemp, setLastUpdated }) {
           },
         })
         .then((response) => {
-          setTemp(response.data.main);
+          setWeather(response.data);
           handleSetLastUpdated();
         })
         .catch((error) => console.log(error));
     }
-  }, [coordinates, setTemp]);
+  }, [coordinates, setWeather]);
 
   function handleSetLastUpdated() {
     setLastUpdated(formatDate(new Date()));
@@ -45,7 +84,7 @@ export default function CityForm({ setTemp, setLastUpdated }) {
   function submitHandler(event) {
     event.preventDefault();
     axios
-      .get(HOST, {
+      .get(WEATHER_HOST, {
         params: {
           q: city,
           appid: API_KEY,
@@ -53,14 +92,13 @@ export default function CityForm({ setTemp, setLastUpdated }) {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        setTemp(response.data.main);
-        setDoesCityExist(false);
+        setWeather(response.data);
+        setDoesCityExist(true);
         handleSetLastUpdated();
       })
       .catch((error) => {
         if (error.response.status === 404) {
-          setDoesCityExist(true);
+          setDoesCityExist(false);
         } else {
           console.log(error);
         }
@@ -69,6 +107,7 @@ export default function CityForm({ setTemp, setLastUpdated }) {
 
   function currentLocationHandler(e) {
     e.preventDefault();
+    setDoesCityExist(true);
     navigator.geolocation.getCurrentPosition((response) => {
       setCoordinates({
         lat: response.coords.latitude,
@@ -88,7 +127,7 @@ export default function CityForm({ setTemp, setLastUpdated }) {
       <button type="something" onClick={currentLocationHandler}>
         <FontAwesomeIcon icon={faLocationCrosshairs} /> Current Location
       </button>
-      <p style={{ display: doesCityExist ? 'block' : 'none' }}>This city does not exist</p>
+      <p style={{ display: doesCityExist ? 'none' : 'block' }}>This city does not exist</p>
     </form>
   );
 }
