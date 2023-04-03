@@ -9,6 +9,7 @@ function App() {
   const [weather, setWeather] = useState({});
   const [forecast, setForecast] = useState([]);
   const [lastUpdated, setLastUpdated] = useState('');
+
   return (
     <div className="weatherContainer">
       <CityForm setWeather={setWeather} setForecast={setForecast} setLastUpdated={setLastUpdated} />

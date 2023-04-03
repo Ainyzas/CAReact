@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getWeatherByCity, getWeatherByCoordinates } from '../../api-calls/weather';
+import { getForecastByCity, getForecastByCoordinates } from '../../api-calls/forecasts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationCrosshairs, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-
-const WEATHER_HOST = 'https://api.openweathermap.org/data/2.5/weather';
-const FORECAST_HOST = 'https://api.openweathermap.org/data/2.5/forecast';
-const API_KEY = '4540327c0fb82a25d6b1cd8a435702a8';
 
 export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
   const [city, setCity] = useState('');
@@ -13,59 +10,16 @@ export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
   const [doesCityExist, setDoesCityExist] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(WEATHER_HOST, {
-        params: {
-          q: 'kaunas',
-          appid: API_KEY,
-          units: 'metric',
-        },
-      })
-      .then((response) => {
-        setWeather(response.data);
-        handleSetLastUpdated();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    axios
-      .get(FORECAST_HOST, {
-        params: {
-          q: 'kaunas',
-          appid: API_KEY,
-          units: 'metric',
-        },
-      })
-      .then((response) => {
-        let data = [];
-        for (let i = 1; i < 6; i++) {
-          data.push(response.data.list[i]);
-        }
-        setForecast(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getWeatherByCity('kaunas').then((data) => setWeather(data));
+    getForecastByCity('kaunas').then((data) => setForecast(data));
+    handleSetLastUpdated();
   }, []);
 
   useEffect(() => {
     if (coordinates.lat && coordinates.long) {
-      axios
-        .get(WEATHER_HOST, {
-          params: {
-            lat: coordinates.lat,
-            lon: coordinates.long,
-            appid: API_KEY,
-            units: 'metric',
-          },
-        })
-        .then((response) => {
-          setWeather(response.data);
-          handleSetLastUpdated();
-        })
-        .catch((error) => console.log(error));
+      getWeatherByCoordinates(coordinates.lat, coordinates.long).then((data) => setWeather(data));
+      getForecastByCoordinates(coordinates.lat, coordinates.long).then((data) => setForecast(data));
+      handleSetLastUpdated();
     }
   }, [coordinates, setWeather]);
 
@@ -81,28 +35,21 @@ export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
     return `${day} ${time}`;
   }
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
-    axios
-      .get(WEATHER_HOST, {
-        params: {
-          q: city,
-          appid: API_KEY,
-          units: 'metric',
-        },
-      })
-      .then((response) => {
-        setWeather(response.data);
+
+    try {
+      if (city) {
+        setWeather(await getWeatherByCity(city));
+        setForecast(await getForecastByCity(city));
         setDoesCityExist(true);
         handleSetLastUpdated();
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          setDoesCityExist(false);
-        } else {
-          console.log(error);
-        }
-      });
+      }
+    } catch (error) {
+      if (error.status === 404) {
+        setDoesCityExist(false);
+      }
+    }
   }
 
   function currentLocationHandler(e) {
@@ -124,7 +71,7 @@ export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
       <button type="submit">
         <FontAwesomeIcon icon={faLocationDot} /> Search
       </button>
-      <button type="something" onClick={currentLocationHandler}>
+      <button type="button" onClick={currentLocationHandler}>
         <FontAwesomeIcon icon={faLocationCrosshairs} /> Current Location
       </button>
       <p style={{ display: doesCityExist ? 'none' : 'block' }}>This city does not exist</p>
