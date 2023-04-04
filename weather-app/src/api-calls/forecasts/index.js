@@ -37,7 +37,7 @@ export async function getForecastByCoordinates(lat, long) {
 
 function handleData(data) {
   let handledData = [];
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i < 7; i++) {
     handledData.push(data.data.list[i]);
   }
   return handledData;

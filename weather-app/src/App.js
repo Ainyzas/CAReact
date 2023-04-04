@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="weatherContainer">
       <CityForm setWeather={setWeather} setForecast={setForecast} setLastUpdated={setLastUpdated} />
-      <TemperatureDisplay temp={weather.main} date={lastUpdated} />
-      <AirDisplay temp={weather.main} weather={weather.weather} wind={weather.wind} />
+      <TemperatureDisplay temp={weather.main} date={lastUpdated} city={weather.name} image={weather.weather} />
       <ForecastDisplay forecast={forecast} />
+      <AirDisplay temp={weather.main} weather={weather.weather} wind={weather.wind} />
     </div>
   );
 }

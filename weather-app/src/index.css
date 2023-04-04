@@ -1,4 +1,5 @@
 body {
+  box-sizing: border-box;
   background-color: #16213ecb;
   color: gainsboro;
   margin: 0;
