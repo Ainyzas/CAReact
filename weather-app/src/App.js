@@ -15,7 +15,13 @@ function App() {
       <CityForm setWeather={setWeather} setForecast={setForecast} setLastUpdated={setLastUpdated} />
       <TemperatureDisplay temp={weather.main} date={lastUpdated} city={weather.name} image={weather.weather} />
       <ForecastDisplay forecast={forecast} />
-      <AirDisplay temp={weather.main} weather={weather.weather} wind={weather.wind} />
+      <AirDisplay
+        timezone={weather.timezone}
+        temp={weather.main}
+        weather={weather.weather}
+        wind={weather.wind}
+        sun={weather.sys}
+      />
     </div>
   );
 }

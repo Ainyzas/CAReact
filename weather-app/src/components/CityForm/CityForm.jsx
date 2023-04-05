@@ -3,6 +3,7 @@ import { getWeatherByCity, getWeatherByCoordinates } from '../../api-calls/weath
 import { getForecastByCity, getForecastByCoordinates } from '../../api-calls/forecasts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationCrosshairs, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import style from './CityForm.module.css';
 
 export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
   const [city, setCity] = useState('');
@@ -55,6 +56,7 @@ export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
   function currentLocationHandler(e) {
     e.preventDefault();
     setDoesCityExist(true);
+    setCity('');
     navigator.geolocation.getCurrentPosition((response) => {
       setCoordinates({
         lat: response.coords.latitude,
@@ -65,15 +67,15 @@ export default function CityForm({ setWeather, setLastUpdated, setForecast }) {
 
   return (
     <form onSubmit={submitHandler}>
-      <label htmlFor="city">City</label>
-      <input type="text" id="city" value={city} onChange={(e) => setCity(e.target.value)} />
-      <br />
-      <button type="submit">
-        <FontAwesomeIcon icon={faLocationDot} /> Search
-      </button>
-      <button type="button" onClick={currentLocationHandler}>
-        <FontAwesomeIcon icon={faLocationCrosshairs} /> Current Location
-      </button>
+      <div className={style.searchBar}>
+        <input type="text" id="city" value={city} placeholder="Enter city" onChange={(e) => setCity(e.target.value)} />
+        <button className={style.searchButton} type="submit">
+          <FontAwesomeIcon icon={faLocationDot} /> Search
+        </button>
+        <button className={style.locationButton} type="button" onClick={currentLocationHandler}>
+          <FontAwesomeIcon icon={faLocationCrosshairs} /> Current Location
+        </button>
+      </div>
       <p style={{ display: doesCityExist ? 'none' : 'block' }}>This city does not exist</p>
     </form>
   );

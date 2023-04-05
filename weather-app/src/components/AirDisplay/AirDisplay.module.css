@@ -13,7 +13,7 @@
 
 .gridWrap {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 90%;
   margin: 0 auto;
 }
@@ -37,8 +37,10 @@
 
 .temperature::before,
 .wind::before,
+.sunrise::before,
 .humidity::before,
-.weather::before {
+.weather::before,
+.sunset::before {
   font: var(--fa-font-solid);
   font-size: 22px;
   display: inline-block;
@@ -56,10 +58,18 @@
   content: '\f72e';
 }
 
+.sunrise::before {
+  content: '\f185';
+}
+
 .humidity::before {
   content: '\f73d';
 }
 
 .weather::before {
-  content: '\f185';
+  content: '\f743';
+}
+
+.sunset::before {
+  content: '\f186';
 }
