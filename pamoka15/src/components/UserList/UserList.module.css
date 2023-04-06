@@ -1,0 +1,7 @@
+.userList div {
+  display: flex;
+}
+
+.userList div li:hover {
+  cursor: pointer;
+}
