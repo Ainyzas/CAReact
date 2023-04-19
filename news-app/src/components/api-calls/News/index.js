@@ -1,5 +1,4 @@
 import axios from 'axios';
-import env from 'react-dotenv';
 
 const NEWS_URL = 'https://newsapi.org/v2/top-headlines?country=lt&pageSize=12';
 const { REACT_APP_API_KEY } = process.env;
