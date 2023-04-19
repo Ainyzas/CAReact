@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Article from '../../atoms/Article/Article';
 import { fetchNews } from '../../../api-calls/News';
-import { StyledPageDiv } from './NewsPage.styled';
+import { StyledButton, StyledButtonDiv, StyledPageDiv } from './NewsPage.styled';
 
 export default function NewsPage({ category }) {
   const [articles, setArticles] = useState([]);
@@ -27,12 +27,14 @@ export default function NewsPage({ category }) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchNews(category, currentPage).then((data) => {
-      setArticles(data.articles);
-      const entries = Math.ceil(data.totalResults / 12);
-      makePagesArray(entries);
-      setIsLoading(false);
-    });
+    setTimeout(() => {
+      fetchNews(category, currentPage).then((data) => {
+        setArticles(data.articles);
+        const entries = Math.ceil(data.totalResults / 12);
+        makePagesArray(entries);
+        setIsLoading(false);
+      });
+    }, 150);
   }, [category, currentPage]);
 
   return (
@@ -42,15 +44,15 @@ export default function NewsPage({ category }) {
           return <Article key={index} title={article.title} author={article.author} url={article.url} />;
         })}
       </StyledPageDiv>
-      <div>
+      <StyledButtonDiv>
         {pages.map((page) => {
           return (
-            <button disabled={isLoading} onClick={() => buttonClickHandler(page)} key={page}>
+            <StyledButton disabled={isLoading} onClick={() => buttonClickHandler(page)} key={page}>
               {page}
-            </button>
+            </StyledButton>
           );
         })}
-      </div>
+      </StyledButtonDiv>
     </div>
   );
 }

@@ -11,4 +11,8 @@ export const StyledNavBar = styled.nav`
 export const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
+
+  :hover {
+    opacity: 50%;
+  }
 `;
