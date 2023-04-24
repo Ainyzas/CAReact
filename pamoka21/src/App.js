@@ -4,9 +4,9 @@ import UserMutateList from './components/UserMutateList/UserMutateList';
 
 function App() {
   return (
-    <div /*style={{ display: 'flex' }}*/>
-      {/* <UserList />
-      <UserList2 /> */}
+    <div style={{ display: 'flex' }}>
+      <UserList />
+      <UserList2 />
       <UserMutateList />
     </div>
   );
