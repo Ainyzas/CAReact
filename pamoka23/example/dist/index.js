@@ -1,3 +1,3 @@
-'use strict';
-console.log('asf');
-var x;
+"use strict";
+let x;
+x = 15;
