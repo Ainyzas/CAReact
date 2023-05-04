@@ -18,6 +18,8 @@ function App() {
     try {
       const response = await axios.post('http://localhost:4000/register', { email, password });
       console.log(response.data);
+      setEmail('');
+      setPassword('');
     } catch (error) {
       console.log(error.message);
     }
@@ -29,6 +31,8 @@ function App() {
       const response = await axios.post('http://localhost:4000/login', { email, password });
       setPermissions(response.data.permissions);
       setToken(response.data.token);
+      setEmail('');
+      setPassword('');
       // localStorage.setItem('jwtToken', response.data.token);
     } catch (error) {
       console.log(error.message);
